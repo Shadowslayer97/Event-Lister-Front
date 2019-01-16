@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
 
 declare var $:any;
@@ -11,14 +12,50 @@ declare var $:any;
 export class AuthenticationComponent implements OnInit {
 
   private userObject: any = {};
+  private confirmPassword: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _restService: RestService) { }
 
   ngOnInit() {
   }
 
-  loginUser(): any {
-    this.router.navigate(['/dashboard']);
+  loginUser() {
+    if(this.validateUserInfo(this.userObject)) {
+      this._restService.postRequest(this.userObject,'/login').subscribe(data => {
+        console.log(data);
+        localStorage.setItem('token',this.userObject.username);
+        this.router.navigate(['/dashboard']);
+      }, err => {
+        console.log(" Login Error")
+      })
+    } else {
+      alert("Please check the credentials");
+    }
+  }
+
+  signUpUser() {
+    if(this.validateUserInfo(this.userObject) && this.userObject.password == this.confirmPassword) {
+      this._restService.postRequest(this.userObject,'/register').subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/login']);
+      }, err=> {
+        console.log(err);
+      })
+    } else {
+      alert("Unsuccessful");
+    }
+  }
+
+  validateUserInfo(user) {
+    if(user.username.length <= 4 || user.username.length >= 15) {
+      alert("Characters must be between 4-15");
+      return false;
+    }
+    else if(user.password <= 8) {
+      alert("Invalid password");
+      return false;
+    }
+    else return true;
   }
 
 //jQUery UI Animations

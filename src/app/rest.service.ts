@@ -7,10 +7,17 @@ import { Observable } from "rxjs/Observable";
 })
 export class RestService {
 
+  private apiUrl:string = "http://localhost:3000/user"
+
   constructor(private http: HttpClient) { }
 
-  // getRequest(param:any): Observable<any> {
-  //   // let completeUrl = this.apiUrl + "?text=" + param;
-  //   // return this.http.get<any>(completeUrl);
-  // }
+  getRequest(param:any, apiPath:string): Observable<any> {
+    let completeUrl = this.apiUrl + apiPath;
+    return this.http.get<any>(completeUrl,{observe:'response'});
+  }
+
+  postRequest(body:any, apiPath:string): Observable<any> {
+    let completeUrl = this.apiUrl + apiPath;
+    return this.http.post<any>(completeUrl,body,{observe:'response'}  );
+  }
 }
