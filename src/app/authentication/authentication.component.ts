@@ -17,6 +17,9 @@ export class AuthenticationComponent implements OnInit {
   constructor(private router: Router, private _restService: RestService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('token')) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   loginUser() {

@@ -8,11 +8,13 @@ import { AuthService } from './auth.service';
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EventFormComponent } from './event-form/event-form.component';
 
 const appRoutes: Routes = [
   { path: '' ,redirectTo: '/login' ,pathMatch:'full' },
   { path: 'login', component: AuthenticationComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthService]  },
+  { path: 'form', component: EventFormComponent, canActivate: [AuthService]  },
   { path:'**' ,redirectTo: '/login' }
 ];
 
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AuthenticationComponent,
-    DashboardComponent
+    DashboardComponent,
+    EventFormComponent
   ],
   imports: [
     BrowserModule,

@@ -13,11 +13,11 @@ export class RestService {
 
   getRequest(param:any, apiPath:string): Observable<any> {
     let completeUrl = this.apiUrl + apiPath;
-    return this.http.get<any>(completeUrl,{observe:'response'});
+    return this.http.get<any>(completeUrl);
   }
 
   postRequest(body:any, apiPath:string): Observable<any> {
     let completeUrl = this.apiUrl + apiPath;
-    return this.http.post<any>(completeUrl,body,{observe:'response'}  );
+    return this.http.post<any>(completeUrl,body);
   }
 }

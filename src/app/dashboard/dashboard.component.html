@@ -1,10 +1,31 @@
-<div class="content">
-  <div class="row text-center">
-    <div class="event-heading">
+
+  <div class="text-center">
       <h2>All Events</h2>
+  </div>
+  <div class="event-list text-center">
+    <div class="event-list-item row">
+      <div class="col-sm-5">
+        <h4> Event name </h4>
+      </div>
+      <div class="col-sm-3">
+        <h4> Location </h4>
+      </div>
+      <div class="col-sm-4">
+        <h4> Organiser </h4>
+      </div>
     </div>
-    <div class="event-list">
-      
+    <div class="event-list-item row" *ngFor="let event of eventList">
+      <div class="col-sm-5">
+        <p> {{event.name}} </p>
+      </div>
+      <div class="col-sm-3">
+        <p> {{event.location}} </p>
+      </div>
+      <div class="col-sm-4">
+        <p> {{event.username}} </p>
+      </div>
     </div>
   </div>
-</div>
+  <div class="event-create text-center">
+    <button type="button" class="btn btn-primary" (click)="newEventForm()" name="button"> Create New Event </button>
+  </div>
